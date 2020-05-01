@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starter/app_core.dart';
-import 'package:starter/screens/home_screen.dart';
+import 'package:starter/home/ui/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static Route buildRoute() => MaterialPageRoute(builder: (_) => LoginScreen());
