@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:starter/user.dart';
+import 'package:starter/user/user.dart';
 
-class AppCore {
+class AppCore extends ChangeNotifier {
   static final _log = Logger("AppCore");
   static AppCore _instance;
 
@@ -19,12 +20,14 @@ class AppCore {
       ? _instance
       : throw Exception("AppCore instance has not been initialized");
 
-  Future<bool> get isUserAuthenticated => _isUserAuthenticated();
-  Future<bool> _isUserAuthenticated() async {
+  // Is user authenticated
+  var _isUserAuthenticated = false;
+  bool get isUserAuthenticated => _isUserAuthenticated;
+
+  Future<void> getUserAuthenticated() async {
     final AuthUser _authUser = await authUser;
-    final bool isAuthenticated =
+    _isUserAuthenticated =
         _authUser != null && _authUser.token != null ?? false;
-    return isAuthenticated;
   }
 
   Future<AuthUser> get authUser => _authUser();
@@ -57,5 +60,24 @@ class AppCore {
     return null;
   }
 
+  // TODO: move to _PreferenceKeys
   String get prefAuthUser => 'authUser';
+
+  // Load state
+  bool _stateLoaded = false;
+  Future loadState() async {
+    if (_stateLoaded) {
+      return;
+    }
+
+    await getUserAuthenticated();
+
+    _stateLoaded = true;
+    _log.info("CoreStateLoaded");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }
