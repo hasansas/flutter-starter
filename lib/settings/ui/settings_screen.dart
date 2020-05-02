@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter/settings/settings.dart';
 import 'package:starter/components/section.dart';
+import 'package:starter/user/ui/user_screen.dart';
 
 const _profileImageRadius = 24.0;
 
@@ -23,7 +24,12 @@ class SettingsScreen extends StatelessWidget {
   Widget _buildSections(BuildContext context) {
     // TODO: change UI
     final sections = <Widget>[
-      _buildUserInfoSection(context),
+      GestureDetector(
+        onTap: () {
+          Navigator.push(context, UserScreen.buildRoute());
+        },
+        child: _buildUserInfoSection(context),
+      ),
       _buildDisplaySection(context),
     ];
 

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:starter/user.dart';
+import 'package:starter/user/user.dart';
 
 class AppCore extends ChangeNotifier {
   static final _log = Logger("AppCore");
