@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:logging/logging.dart';
 import 'package:starter/app_core.dart';
+import 'package:starter/app_localizations.dart';
 import 'package:starter/settings/settings.dart';
 import 'package:starter/home/ui/home_screen.dart';
 import 'package:starter/login/ui/login_screen.dart';
@@ -47,6 +49,23 @@ class _AppState extends State<App> {
             ThemeData(primarySwatch: Colors.blue, brightness: Brightness.light),
         themeMode: themeMode,
         darkTheme: ThemeData(brightness: Brightness.dark),
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (var supportedLocaleLanguage in supportedLocales) {
+            if (supportedLocaleLanguage.languageCode == locale.languageCode &&
+                supportedLocaleLanguage.countryCode == locale.countryCode) {
+              return supportedLocaleLanguage;
+            }
+          }
+          // If device not support with locale to get language code then default get first on from the appSupportedLocales list
+          return supportedLocales.first;
+        },
+        localizationsDelegates: [
+          AppLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: appSupportedLocales
+            .map((local) => Locale(local.languageCode, local.countryCode)),
         home: _buildHome(context));
   }
 
