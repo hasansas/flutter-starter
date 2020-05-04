@@ -5,7 +5,7 @@ import 'package:starter/app_core.dart';
 import 'package:starter/app_localizations.dart';
 import 'package:starter/settings/settings.dart';
 import 'package:starter/home/ui/home_screen.dart';
-import 'package:starter/login/ui/login_screen.dart';
+import 'package:starter/user/login/ui/login_screen.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);

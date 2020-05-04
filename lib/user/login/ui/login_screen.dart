@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starter/app_core.dart';
 import 'package:starter/home/ui/home_screen.dart';
+import 'package:starter/user/register/ui/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static Route buildRoute() => MaterialPageRoute(builder: (_) => LoginScreen());
@@ -15,13 +16,21 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Center(
-        child: RaisedButton(
-            child: Text('Login'),
-            onPressed: () {
-              login(context);
-            }),
-      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+                child: Text('Login'),
+                onPressed: () {
+                  login(context);
+                }),
+            RaisedButton(
+                child: Text('Register'),
+                onPressed: () {
+                  Navigator.push(context, RegisterScreen.buildRoute());
+                }),
+          ]),
     );
   }
 
@@ -31,7 +40,5 @@ class _LoginScreenState extends State<LoginScreen> {
         AppCore.instance.prefAuthUser, ['id', 'name', 'image', 'token abc']);
 
     Navigator.pushReplacement(context, HomeScreen.buildRoute());
-    // Navigator.pushAndRemoveUntil(
-    //     context, HomeScreen.buildRoute(), (route) => false);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/components/popup_menu.dart';
+import 'package:starter/widgets/popup_menu.dart';
 import 'package:starter/settings/ui/settings_screen.dart';
 
 List<Widget> homeBarActions(context) {
