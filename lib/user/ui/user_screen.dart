@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:starter/app_core.dart';
-import 'package:starter/login/ui/login_screen.dart';
+import 'package:starter/user/login/ui/login_screen.dart';
 
 class UserScreen extends StatelessWidget {
   static Route buildRoute() => MaterialPageRoute(builder: (_) => UserScreen());

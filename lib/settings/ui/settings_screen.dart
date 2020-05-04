@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter/settings/settings.dart';
-import 'package:starter/components/section.dart';
+import 'package:starter/widgets/section.dart';
 import 'package:starter/user/ui/user_screen.dart';
 
 const _profileImageRadius = 24.0;

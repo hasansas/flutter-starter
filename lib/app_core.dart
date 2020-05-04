@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:starter/user/user.dart';
+import 'package:starter/user/models/user_model.dart';
 
 class AppCore extends ChangeNotifier {
   static final _log = Logger("AppCore");
@@ -49,7 +49,7 @@ class AppCore extends ChangeNotifier {
           userDataLength > token ? _userData[displayImageUrl] : null;
       final String userToken = userDataLength > token ? _userData[token] : null;
 
-      User _userInfo = User(
+      UserModel _userInfo = UserModel(
           id: userid,
           displayName: userdisplayName,
           displayImageUrl: userdisplayImageUrl);
