@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:logging/logging.dart';
-import 'package:starter/app_core.dart';
-import 'package:starter/app_localizations.dart';
+import 'package:starter/app/app_core.dart';
+import 'package:starter/app/app_theme.dart';
+import 'package:starter/app/app_localizations.dart';
 import 'package:starter/settings/settings.dart';
+import 'package:starter/splash_screen/ui/splash_screen.dart';
 import 'package:starter/home/ui/home_screen.dart';
 import 'package:starter/user/login/ui/login_screen.dart';
+import 'package:starter/user/user.dart';
+import 'package:starter/user/providers/user_provider.dart';
+import 'package:starter/user/providers/user_auth_provider.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);
@@ -42,13 +48,20 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     _log.info("RunApp");
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => UserAuthProvider()),
+      ChangeNotifierProvider(create: (context) => UserProvider())
+    ], child: _buildApp(context));
+  }
+
+  Widget _buildApp(BuildContext context) {
+    final appTheme = AppTheme.of(context);
     final themeMode = Settings.instance.themeMode;
     return MaterialApp(
         title: 'Flutter Demo',
-        theme:
-            ThemeData(primarySwatch: Colors.blue, brightness: Brightness.light),
+        theme: appTheme.lightTheme,
+        darkTheme: appTheme.darkTheme,
         themeMode: themeMode,
-        darkTheme: ThemeData(brightness: Brightness.dark),
         localeResolutionCallback: (locale, supportedLocales) {
           for (var supportedLocaleLanguage in supportedLocales) {
             if (supportedLocaleLanguage.languageCode == locale.languageCode &&
@@ -66,12 +79,14 @@ class _AppState extends State<App> {
         ],
         supportedLocales: appSupportedLocales
             .map((local) => Locale(local.languageCode, local.countryCode)),
-        home: _buildHome(context));
+        home: Consumer<UserProvider>(builder: (context, user, child) {
+          return _buildHome(context);
+        }));
   }
 
   Widget _buildHome(BuildContext context) {
     return FutureBuilder(
-      future: _loadState(),
+      future: _loadState(context),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
@@ -79,15 +94,22 @@ class _AppState extends State<App> {
                 ? HomeScreen()
                 : LoginScreen();
           default:
-            return Text('splash');
+            return SplashScreen();
         }
       },
     );
   }
 
-  Future<void> _loadState() async {
+  Future<void> _loadState(BuildContext context) async {
     await AppCore.instance.loadState();
     await Settings.instance.loadState();
+
+    if (AppCore.instance.isUserAuthenticated) {
+      final _user = User();
+      await _user.getAuthUser(context,
+          id: AppCore.instance.authUser.id,
+          userToken: AppCore.instance.authUser.token);
+    }
   }
 
   void _onSettingsUpdated() {

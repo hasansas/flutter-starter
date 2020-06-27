@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:starter/app.dart';
+import 'package:starter/app/app.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO

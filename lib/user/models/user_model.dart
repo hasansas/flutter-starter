@@ -1,32 +1,30 @@
-import 'package:flutter/foundation.dart';
+import 'package:logging/logging.dart';
 
-class UserModel with ChangeNotifier {
-  final String id;
-  final String displayName;
-  final String displayImageUrl;
+class UserModel {
+  static final _log = Logger("SelectProvince");
+  int id;
+  String name;
+  String email;
+  String displayImageUrl;
 
-  UserModel({this.id, this.displayName, this.displayImageUrl});
+  UserModel(
+      {this.id, this.name, this.email, this.displayImageUrl});
 
   factory UserModel.fromJson(dynamic json) {
     return UserModel(
       id: json['id'],
-      displayName: json['display_name'],
-      displayImageUrl: json['display_image_url'],
+      name: json['name'],
+      email: json['email'],
+      displayImageUrl: json['display_image']
     );
   }
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     var map = Map<String, dynamic>();
     map["id"] = this.id;
-    map["display_name"] = this.displayName;
-    map["display_image_url"] = this.displayName;
+    map["name"] = this.name;
+    map["email"] = this.email;
+    map["display_image"] = this.displayImageUrl;
 
     return map;
   }
-}
-
-class AuthUser {
-  final UserModel userInfo;
-  final String token;
-
-  AuthUser({this.userInfo, this.token});
 }

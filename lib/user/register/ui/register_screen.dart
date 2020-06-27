@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:intl/intl.dart';
 import 'package:starter/widgets/forms/input_text_field.dart';
+import 'package:starter/user/register/models/register_model.dart';
+import 'package:starter/user/register/register.dart';
+
+enum Gender { male, female }
 
 class RegisterScreen extends StatelessWidget {
   static Route buildRoute() =>
       MaterialPageRoute(builder: (_) => RegisterScreen());
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Register(),
-      ),
+    return Scaffold(
+      body: Register(),
     );
   }
 }
@@ -20,9 +24,13 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<StatefulWidget> {
+  static final _log = Logger("Register");
   final _formKey = GlobalKey<FormState>();
-  RegisterModel formModel = RegisterModel();
+  RegisterModel _formModel = RegisterModel();
+  Gender _gender;
+  String dropdownValue = 'One';
 
+  TextEditingController dateCtl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -38,7 +46,69 @@ class _RegisterScreenState extends State<StatefulWidget> {
                     children: <Widget>[
                       Padding(
                           padding: EdgeInsets.only(bottom: 32.0),
-                          child: Text('Register',style: Theme.of(context).textTheme.headline4)),
+                          child: Text('Register',
+                              style: Theme.of(context).textTheme.headline4)),
+                      InputTextField(
+                        isDatePicker: true,
+                        hintText: 'DOB',
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return 'Please fill DOB';
+                          }
+                          setState(() {
+                            _formModel.dob =
+                                DateFormat(dateFormat).parse(value);
+                          });
+                          return null;
+                        },
+                      ),
+                      // DropdownButton<String>(
+                      //   value: dropdownValue,
+                      //   icon: Icon(Icons.arrow_downward),
+                      //   iconSize: 24,
+                      //   elevation: 16,
+                      //   style: TextStyle(color: Colors.deepPurple),
+                      //   underline: Container(
+                      //     height: 2,
+                      //     color: Colors.deepPurpleAccent,
+                      //   ),
+                      //   onChanged: (String newValue) {
+                      //     setState(() {
+                      //       dropdownValue = newValue;
+                      //     });
+                      //   },
+                      //   items: <String>['One', 'Two', 'Free', 'Four']
+                      //       .map<DropdownMenuItem<String>>((String value) {
+                      //     return DropdownMenuItem<String>(
+                      //       value: value,
+                      //       child: Text(value),
+                      //     );
+                      //   }).toList(),
+                      // ),
+                      // ListTile(
+                      //   title: const Text('Male'),
+                      //   leading: Radio(
+                      //     value: Gender.male,
+                      //     groupValue: _gender,
+                      //     onChanged: (Gender value) {
+                      //       setState(() {
+                      //         _gender = value;
+                      //       });
+                      //     },
+                      //   ),
+                      // ),
+                      // ListTile(
+                      //   title: const Text('Female'),
+                      //   leading: Radio(
+                      //     value: Gender.female,
+                      //     groupValue: _gender,
+                      //     onChanged: (Gender value) {
+                      //       setState(() {
+                      //         _gender = value;
+                      //       });
+                      //     },
+                      //   ),
+                      // ),
                       Container(
                         alignment: Alignment.topCenter,
                         child: Row(
@@ -50,14 +120,13 @@ class _RegisterScreenState extends State<StatefulWidget> {
                               child: InputTextField(
                                 hintText: 'First Name',
                                 validator: (String value) {
-                                  print(value);
                                   if (value.isEmpty) {
                                     return 'Enter your first name';
                                   }
+                                  setState(() {
+                                    _formModel.firstName = value;
+                                  });
                                   return null;
-                                },
-                                onSaved: (String value) {
-                                  formModel.firstName = value;
                                 },
                               ),
                             )),
@@ -72,10 +141,10 @@ class _RegisterScreenState extends State<StatefulWidget> {
                                       if (value.isEmpty) {
                                         return 'Enter your last name';
                                       }
+                                      setState(() {
+                                        _formModel.lastName = value;
+                                      });
                                       return null;
-                                    },
-                                    onSaved: (String value) {
-                                      formModel.lastName = value;
                                     },
                                   ),
                                 ),
@@ -91,10 +160,10 @@ class _RegisterScreenState extends State<StatefulWidget> {
                           if (!isValidEmail(value)) {
                             return 'Please enter a valid email';
                           }
+                          setState(() {
+                            _formModel.email = value;
+                          });
                           return null;
-                        },
-                        onSaved: (String value) {
-                          formModel.email = value;
                         },
                       ),
                       InputTextField(
@@ -104,11 +173,10 @@ class _RegisterScreenState extends State<StatefulWidget> {
                           if (value.length < 7) {
                             return 'Password should be minimum 7 characters';
                           }
-                          _formKey.currentState.save();
+                          setState(() {
+                            _formModel.password = value;
+                          });
                           return null;
-                        },
-                        onSaved: (String value) {
-                          formModel.password = value;
                         },
                       ),
                       InputTextField(
@@ -117,10 +185,8 @@ class _RegisterScreenState extends State<StatefulWidget> {
                         validator: (String value) {
                           if (value.length < 7) {
                             return 'Password should be minimum 7 characters';
-                          } else if (formModel.password != null &&
-                              value != formModel.password) {
-                            print(value);
-                            print(formModel.password);
+                          } else if (_formModel.password != null &&
+                              value != _formModel.password) {
                             return 'Password not matched';
                           }
                           return null;
@@ -128,13 +194,8 @@ class _RegisterScreenState extends State<StatefulWidget> {
                       ),
                       RaisedButton(
                         onPressed: () {
-                          // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-
-                            Scaffold.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')));
+                            register(_formModel);
                           }
                         },
                         child: Text('Submit'),
@@ -143,12 +204,11 @@ class _RegisterScreenState extends State<StatefulWidget> {
                   )))),
     );
   }
-}
 
-class RegisterModel {
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  RegisterModel({this.firstName, this.lastName, this.email, this.password});
+  void register(RegisterModel form) {
+    _log.info(_formModel.toJson());
+
+    Scaffold.of(context)
+        .showSnackBar(SnackBar(content: Text('Processing Data')));
+  }
 }

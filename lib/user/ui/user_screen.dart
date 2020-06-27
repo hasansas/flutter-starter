@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:starter/app_core.dart';
+import 'package:starter/app/preference_keys.dart';
 import 'package:starter/user/login/ui/login_screen.dart';
 
 class UserScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class UserScreen extends StatelessWidget {
 
   void logout(BuildContext context) async {
     final _prefs = await SharedPreferences.getInstance();
-    await _prefs.remove(AppCore.instance.prefAuthUser);
+    await _prefs.remove(PreferenceKeys.authUser);
 
     Navigator.pushAndRemoveUntil(
         context, LoginScreen.buildRoute(), (route) => false);

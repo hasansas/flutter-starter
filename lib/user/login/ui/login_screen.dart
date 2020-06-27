@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:starter/app_core.dart';
+import 'package:starter/app/preference_keys.dart';
 import 'package:starter/home/ui/home_screen.dart';
 import 'package:starter/user/register/ui/register_screen.dart';
 
@@ -15,7 +15,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,9 +35,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login(BuildContext context) async {
     final _prefs = await SharedPreferences.getInstance();
-    await _prefs.setStringList(
-        AppCore.instance.prefAuthUser, ['id', 'name', 'image', 'token abc']);
+    await _prefs.setStringList(PreferenceKeys.authUser, ['1', 'token abc']);
 
+    // go to home screen
     Navigator.pushReplacement(context, HomeScreen.buildRoute());
   }
 }
