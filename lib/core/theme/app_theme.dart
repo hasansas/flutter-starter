@@ -12,6 +12,8 @@ class AppTheme {
 
   // Base primary color
   static const int _primaryColor = 0xFF2F80ED;
+  static const int _secondaryColor = 0xFFEA4C89;
+  static const int _disabledColor = 0xFFBDBDBD;
 
   static const MaterialColor primarySwatch =
       MaterialColor(_primaryColor, <int, Color>{
@@ -130,10 +132,13 @@ class AppTheme {
 
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
+        primary: primarySwatch,
+        secondary: const Color(_secondaryColor),
         seedColor: const Color(_primaryColor),
         brightness: Brightness.light,
       ),
       scaffoldBackgroundColor: Colors.white,
+      disabledColor: const Color(_disabledColor),
 
       // AppBar baseline
       appBarTheme: AppBarTheme(
@@ -143,6 +148,33 @@ class AppTheme {
         foregroundColor: Colors.black,
         centerTitle: true,
         titleTextStyle: titleLarge.copyWith(color: Colors.black),
+      ),
+
+      // Input Decoration
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: const Color(0xFFF4F4F6),
+        labelStyle: TextStyle(color: Colors.grey.shade600),
+        hintStyle: TextStyle(color: Colors.grey.shade400),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 16.0,
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey..withValues(alpha: 0.2)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey..withValues(alpha: 0.4)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(_primaryColor), width: 2.0),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        ),
       ),
 
       // Card baseline
@@ -207,6 +239,13 @@ class AppTheme {
   /// ===================
   /// Dark Theme
   /// ===================
+  static const Color secondaryColorDark = Colors.white;
+  static const Color headlineColorDark = Color(0xFFFFFFFF);
+  static const Color subtitleColorDark = Color(0xFFFFFFFF);
+  static const Color bodyColorDark = Color(0xFFFFFFFF);
+  static const Color shadowColorDark = Color(0xFF424242);
+  static const Color appBarBackgroundColorDark = Color(0xFF212121);
+
   static ThemeData get dark {
     final base = ThemeData.dark(useMaterial3: true);
 
@@ -225,6 +264,35 @@ class AppTheme {
         foregroundColor: Colors.white,
         centerTitle: true,
         titleTextStyle: titleLarge.copyWith(color: Colors.white),
+      ), // Input Decoration
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: shadowColorDark,
+        labelStyle: const TextStyle(color: subtitleColorDark),
+        hintStyle: const TextStyle(color: subtitleColorDark),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 8.0,
+          horizontal: 16.0,
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: subtitleColorDark.withValues(alpha: 0.4),
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: subtitleColorDark.withValues(alpha: 0.6),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: primarySwatch, width: 2.0),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        ),
       ),
 
       // Card baseline
