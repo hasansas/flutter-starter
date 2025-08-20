@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_text_field.dart';
 import '../providers/auth_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -39,17 +40,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
+            AppTextField(
               controller: emailCtrl,
-              decoration: const InputDecoration(labelText: "Email"),
+              label: "Email",
+              keyboardType: TextInputType.emailAddress,
             ),
-            TextField(
+            const SizedBox(height: 12),
+            AppTextField(
               controller: passCtrl,
-              decoration: const InputDecoration(labelText: "Password"),
+              label: "Password",
               obscureText: true,
             ),
             const SizedBox(height: 20),
-            CustomButton(
+            AppButton(
               label: "Login",
               loading: auth.loading,
               expanded: true,
