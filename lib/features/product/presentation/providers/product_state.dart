@@ -17,6 +17,15 @@ class ProductState {
   final String? selectedStatus;
   final bool isSearchMode;
   final Map<String, int>? productStatistics;
+  
+  // Filter state persistence
+  final Set<String> selectedCategories;
+  final Set<String> selectedStatuses;
+  final Set<String> selectedTags;
+  final double minPrice;
+  final double maxPrice;
+  final bool hasHalalCertification;
+  final bool isOrganic;
 
   const ProductState({
     this.isLoading = false,
@@ -34,6 +43,13 @@ class ProductState {
     this.selectedStatus,
     this.isSearchMode = false,
     this.productStatistics,
+    this.selectedCategories = const {},
+    this.selectedStatuses = const {},
+    this.selectedTags = const {},
+    this.minPrice = 0.0,
+    this.maxPrice = 1000000.0,
+    this.hasHalalCertification = false,
+    this.isOrganic = false,
   });
 
   /// Get current displayed products (search results or regular products)
@@ -55,6 +71,13 @@ class ProductState {
     String? selectedStatus,
     bool? isSearchMode,
     Map<String, int>? productStatistics,
+    Set<String>? selectedCategories,
+    Set<String>? selectedStatuses,
+    Set<String>? selectedTags,
+    double? minPrice,
+    double? maxPrice,
+    bool? hasHalalCertification,
+    bool? isOrganic,
   }) {
     return ProductState(
       isLoading: isLoading ?? this.isLoading,
@@ -72,6 +95,13 @@ class ProductState {
       selectedStatus: selectedStatus ?? this.selectedStatus,
       isSearchMode: isSearchMode ?? this.isSearchMode,
       productStatistics: productStatistics ?? this.productStatistics,
+      selectedCategories: selectedCategories ?? this.selectedCategories,
+      selectedStatuses: selectedStatuses ?? this.selectedStatuses,
+      selectedTags: selectedTags ?? this.selectedTags,
+      minPrice: minPrice ?? this.minPrice,
+      maxPrice: maxPrice ?? this.maxPrice,
+      hasHalalCertification: hasHalalCertification ?? this.hasHalalCertification,
+      isOrganic: isOrganic ?? this.isOrganic,
     );
   }
 }

@@ -168,6 +168,14 @@ class ProductNotifier extends StateNotifier<ProductState> {
       searchResults: [],
       selectedCategory: null,
       selectedStatus: null,
+      // Reset all filter state
+      selectedCategories: const <String>{},
+      selectedStatuses: const <String>{},
+      selectedTags: const <String>{},
+      minPrice: 0.0,
+      maxPrice: 1000000.0,
+      hasHalalCertification: false,
+      isOrganic: false,
     );
     
     // If products list is empty, load products
@@ -227,16 +235,31 @@ class ProductNotifier extends StateNotifier<ProductState> {
     List<String>? tags,
     double? minPrice,
     double? maxPrice,
+    bool? hasHalalCertification,
+    bool? isOrganic,
     String sortBy = 'name',
     String sortOrder = 'asc',
   }) async {
     try {
+      // Save filter state for persistence
+      final selectedCategories = category != null ? {category} : <String>{};
+      final selectedStatuses = status != null ? {status} : <String>{};
+      final selectedTagsSet = tags?.toSet() ?? <String>{};
+      
       state = state.copyWith(
         isSearching: true,
         searchQuery: query ?? '',
         selectedCategory: category,
         selectedStatus: status,
         isSearchMode: true,
+        // Save filter state
+        selectedCategories: selectedCategories,
+        selectedStatuses: selectedStatuses,
+        selectedTags: selectedTagsSet,
+        minPrice: minPrice ?? 0.0,
+        maxPrice: maxPrice ?? 1000000.0,
+        hasHalalCertification: hasHalalCertification ?? false,
+        isOrganic: isOrganic ?? false,
       );
 
       final results = await filterProducts(

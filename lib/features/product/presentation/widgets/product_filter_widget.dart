@@ -96,16 +96,17 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
             .loadProductStatistics(widget.sellerId);
       }
 
-      // Simulate loading categories and tags from API
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      // Get price range from existing products
-      final minPrice = 0.0;
-      final maxPrice = 1000000.0;
-
+      // Restore filter state from ProductState
+      final productState = ref.read(productNotifierProvider);
+      
       if (mounted) {
         setState(() {
-          _currentRangeValues = RangeValues(minPrice, maxPrice);
+          _selectedCategories = Set.from(productState.selectedCategories);
+          _selectedStatuses = Set.from(productState.selectedStatuses);
+          _selectedTags = Set.from(productState.selectedTags);
+          _currentRangeValues = RangeValues(productState.minPrice, productState.maxPrice);
+          _hasHalalCertification = productState.hasHalalCertification;
+          _isOrganic = productState.isOrganic;
           _isLoading = false;
         });
       }
@@ -146,6 +147,8 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
             tags: _selectedTags.isNotEmpty ? _selectedTags.toList() : null,
             minPrice: _currentRangeValues.start,
             maxPrice: _currentRangeValues.end,
+            hasHalalCertification: _hasHalalCertification,
+            isOrganic: _isOrganic,
             sortBy: 'name',
             sortOrder: 'asc',
           );
