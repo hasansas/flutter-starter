@@ -76,7 +76,7 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
               color: Theme.of(context).colorScheme.surface,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 4,
                   offset: const Offset(0, 2),
                 ),
@@ -118,7 +118,7 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
                                 ? Theme.of(context).colorScheme.primary
                                 : Theme.of(context).colorScheme.surface,
                             border: Border.all(
-                              color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.3),
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),

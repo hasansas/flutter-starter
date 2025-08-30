@@ -21,7 +21,7 @@ class ProductFilterWidget extends ConsumerStatefulWidget {
 }
 
 class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
-  List<String> _availableCategories = [
+  final List<String> _availableCategories = [
     'Umum',
     'Makanan Pokok',
     'Ikan & Seafood',
@@ -43,7 +43,7 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
     'Lainnya',
   ];
 
-  List<String> _availableTags = [
+  final List<String> _availableTags = [
     'premium',
     'organik',
     'halal',
@@ -311,9 +311,9 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             activeTrackColor: colorScheme.primary,
-            inactiveTrackColor: colorScheme.outline.withOpacity(0.3),
+            inactiveTrackColor: colorScheme.outline.withValues(alpha: 0.3),
             thumbColor: colorScheme.primary,
-            overlayColor: colorScheme.primary.withOpacity(0.1),
+            overlayColor: colorScheme.primary.withValues(alpha: 0.1),
           ),
           child: RangeSlider(
             values: _currentRangeValues,
@@ -501,7 +501,7 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
           subtitle: Text(
             'Produk memiliki sertifikat halal resmi',
             style: textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           value: _hasHalalCertification,
@@ -524,7 +524,7 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
           subtitle: Text(
             'Produk diproduksi secara organik',
             style: textTheme.bodySmall?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
             ),
           ),
           value: _isOrganic,
@@ -562,7 +562,7 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
         Text(
           'Pilih tag yang sesuai untuk memudahkan pencarian',
           style: textTheme.bodySmall?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
           ),
         ),
         const SizedBox(height: 12),
@@ -646,9 +646,9 @@ class _StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withOpacity(0.3), width: 1),
+        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
       ),
       child: Column(
         children: [
@@ -664,7 +664,7 @@ class _StatCard extends StatelessWidget {
           Text(
             label,
             style: textTheme.bodySmall?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withValues(alpha: 0.7),
             ),
             textAlign: TextAlign.center,
           ),
@@ -699,7 +699,7 @@ class _FilterChip extends StatelessWidget {
           border: Border.all(
             color: isSelected
                 ? colorScheme.primary
-                : colorScheme.outline.withOpacity(0.3),
+                : colorScheme.outline.withValues(alpha: 0.3),
             width: 1,
           ),
           borderRadius: BorderRadius.circular(20),

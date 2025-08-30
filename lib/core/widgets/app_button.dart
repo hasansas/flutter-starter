@@ -141,7 +141,7 @@ class AppButton extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               color ?? defaultColor,
-              (color ?? defaultColor).withOpacity(0.8),
+              (color ?? defaultColor).withValues(alpha: 0.8),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -151,7 +151,7 @@ class AppButton extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: (color ?? defaultColor).withOpacity(0.3),
+              color: (color ?? defaultColor).withValues(alpha: 0.3),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),

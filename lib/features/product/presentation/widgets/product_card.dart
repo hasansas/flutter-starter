@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: colorScheme.surfaceVariant,
+                  color: colorScheme.surfaceContainerHighest,
                 ),
                 child: Stack(
                   children: [
@@ -56,11 +56,11 @@ class ProductCard extends StatelessWidget {
                                 return Container(
                                   width: 80,
                                   height: 80,
-                                  color: colorScheme.surfaceVariant,
+                                  color: colorScheme.surfaceContainerHighest,
                                   child: Icon(
                                     Iconsax.image,
                                     size: 24,
-                                    color: colorScheme.onSurfaceVariant,
+                                    color: colorScheme.onSurface,
                                   ),
                                 );
                               },
@@ -68,11 +68,11 @@ class ProductCard extends StatelessWidget {
                           : Container(
                               width: 80,
                               height: 80,
-                              color: colorScheme.surfaceVariant,
+                              color: colorScheme.surfaceContainerHighest,
                               child: Icon(
                                 Iconsax.image,
                                 size: 24,
-                                color: colorScheme.onSurfaceVariant,
+                                color: colorScheme.onSurface,
                               ),
                             ),
                     ),
@@ -110,7 +110,7 @@ class ProductCard extends StatelessWidget {
                            Text(
                              formatCurrency(product.price),
                              style: textTheme.bodySmall?.copyWith(
-                               color: colorScheme.onSurfaceVariant,
+                               color: colorScheme.onSurface,
                                decoration: TextDecoration.lineThrough,
                              ),
                            ),
@@ -133,8 +133,8 @@ class ProductCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
                             color: product.stock > 0 
-                                ? Colors.green.withOpacity(0.1)
-                                : colorScheme.errorContainer.withOpacity(0.3),
+                                ? Colors.green.withValues(alpha: 0.1)
+                : colorScheme.errorContainer.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Row(
@@ -166,7 +166,7 @@ class ProductCard extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: colorScheme.surfaceVariant,
+                            color: colorScheme.surfaceContainerHighest,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Row(
@@ -175,7 +175,7 @@ class ProductCard extends StatelessWidget {
                               Icon(
                                 Iconsax.category,
                                 size: 10,
-                                color: colorScheme.onSurfaceVariant,
+                                color: colorScheme.onSurface,
                               ),
                               const SizedBox(width: 2),
                               Text(
@@ -183,7 +183,7 @@ class ProductCard extends StatelessWidget {
                                     ? '${product.category.substring(0, 8)}...'
                                     : product.category,
                                 style: textTheme.labelSmall?.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
+                                  color: colorScheme.onSurface,
                                   fontSize: 10,
                                 ),
                               ),
@@ -227,7 +227,7 @@ class ProductCard extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: colorScheme.primaryContainer.withOpacity(0.3),
+                            color: colorScheme.primaryContainer.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Icon(
@@ -245,7 +245,7 @@ class ProductCard extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
-                            color: colorScheme.errorContainer.withOpacity(0.3),
+                            color: colorScheme.errorContainer.withValues(alpha: 0.3),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Icon(
@@ -273,9 +273,9 @@ class ProductCard extends StatelessWidget {
       case 'inactive':
         return colorScheme.errorContainer;
       case 'draft':
-        return colorScheme.surfaceVariant;
+        return colorScheme.surfaceContainerHighest;
       default:
-        return colorScheme.surfaceVariant;
+        return colorScheme.surfaceContainerHighest;
     }
   }
 
@@ -299,9 +299,9 @@ class ProductCard extends StatelessWidget {
       case 'inactive':
         return colorScheme.onErrorContainer;
       case 'draft':
-        return colorScheme.onSurfaceVariant;
+        return colorScheme.onSurface;
       default:
-        return colorScheme.onSurfaceVariant;
+        return colorScheme.onSurface;
     }
   }
 }

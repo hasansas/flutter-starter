@@ -22,7 +22,7 @@ class AppBottomNavigation extends StatelessWidget {
         color: colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withOpacity(0.1),
+            color: colorScheme.shadow.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, -2),
           ),
@@ -101,7 +101,7 @@ class AppBottomNavigation extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: isActive 
-              ? colorScheme.primary.withOpacity(0.1)
+              ? colorScheme.primary.withValues(alpha: 0.1)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(AppTheme.radiusM),
         ),
@@ -117,7 +117,7 @@ class AppBottomNavigation extends StatelessWidget {
                   key: ValueKey(isActive),
                   color: isActive 
                       ? colorScheme.primary
-                      : colorScheme.onSurface.withOpacity(0.6),
+                      : colorScheme.onSurface.withValues(alpha: 0.6),
                   size: 18,
                 ),
               ),
@@ -129,7 +129,7 @@ class AppBottomNavigation extends StatelessWidget {
                 style: textTheme.labelSmall!.copyWith(
                   color: isActive 
                       ? colorScheme.primary
-                      : colorScheme.onSurface.withOpacity(0.6),
+                      : colorScheme.onSurface.withValues(alpha: 0.6),
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                   fontSize: 9,
                 ),

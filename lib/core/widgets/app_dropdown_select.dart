@@ -39,7 +39,7 @@ class AppDropdownSelect extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -57,7 +57,7 @@ class AppDropdownSelect extends StatelessWidget {
           decoration: InputDecoration(
             labelText: label,
             labelStyle: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.w500,
             ),
             filled: true,
@@ -65,14 +65,14 @@ class AppDropdownSelect extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               borderSide: BorderSide(
-                color: colorScheme.outline.withOpacity(0.3),
+                color: colorScheme.outline.withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               borderSide: BorderSide(
-                color: colorScheme.outline.withOpacity(0.3),
+                color: colorScheme.outline.withValues(alpha: 0.3),
                 width: 1,
               ),
             ),
@@ -119,14 +119,14 @@ class AppDropdownSelect extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Search...',
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
+                color: colorScheme.onSurface,
               ),
               prefixIcon: Icon(
                 Icons.search,
-                color: colorScheme.onSurfaceVariant,
+                color: colorScheme.onSurface,
               ),
               filled: true,
-              fillColor: colorScheme.surfaceVariant.withOpacity(0.3),
+              fillColor: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(AppTheme.radiusM),
                 borderSide: BorderSide.none,

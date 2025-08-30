@@ -62,7 +62,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             width: 80,
                             height: 80,
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color: Colors.white.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(AppTheme.radiusXL),
                             ),
                             child: const Icon(
@@ -83,7 +83,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           Text(
                             'Masuk ke akun seller Anda',
                             style: theme.textTheme.bodyLarge?.copyWith(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                             ),
                           ),
                         ],
@@ -104,10 +104,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(AppTheme.spacingXL),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: AppTheme.spacingL),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                            const SizedBox(height: AppTheme.spacingM),
                             Text(
                               'Masuk',
                               style: theme.textTheme.headlineSmall?.copyWith(
@@ -119,10 +120,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             Text(
                               'Silakan masukkan email dan password Anda',
                               style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.colorScheme.onSurface.withOpacity(0.7),
+                                color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                               ),
                             ),
-                            const SizedBox(height: AppTheme.spacingXL),
+                            const SizedBox(height: AppTheme.spacingL),
                             // Email Field
                             AppTextField(
                               controller: emailCtrl,
@@ -157,7 +158,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: AppTheme.spacingXL),
+                            const SizedBox(height: AppTheme.spacingL),
                             // Login Button
                             Center(
                               child: SizedBox(
@@ -185,7 +186,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 Text(
                                   'Belum punya akun? ',
                                   style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onSurface.withOpacity(0.7),
+                                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
                                   ),
                                 ),
                                 TextButton(
@@ -207,7 +208,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 ),
                               ],
                             ),
+                            const SizedBox(height: AppTheme.spacingM),
                           ],
+                          ),
                         ),
                       ),
                     ),

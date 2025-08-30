@@ -197,7 +197,7 @@ class _ProductFormPageState extends ConsumerState<ProductFormPage> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        border: Border.all(color: colorScheme.outline.withOpacity(0.3)),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -215,9 +215,9 @@ class _ProductFormPageState extends ConsumerState<ProductFormPage> {
             height: 100,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: colorScheme.surfaceVariant.withOpacity(0.3),
+              color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: colorScheme.outline.withOpacity(0.3)),
+              border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
             ),
             child: Center(
               child: Column(
@@ -252,7 +252,7 @@ class _ProductFormPageState extends ConsumerState<ProductFormPage> {
         ),
         const SizedBox(height: 12),
         DropdownButtonFormField<String>(
-          value: _category,
+          initialValue: _category,
           decoration: const InputDecoration(labelText: 'Kategori Produk *'),
           items: const [
             DropdownMenuItem(value: 'Umum', child: Text('Umum')),
@@ -336,7 +336,7 @@ class _ProductFormPageState extends ConsumerState<ProductFormPage> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      border: Border.all(color: colorScheme.outline.withOpacity(0.5)),
+                      border: Border.all(color: colorScheme.outline.withValues(alpha: 0.5)),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
@@ -362,7 +362,7 @@ class _ProductFormPageState extends ConsumerState<ProductFormPage> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      border: Border.all(color: colorScheme.outline.withOpacity(0.5)),
+                      border: Border.all(color: colorScheme.outline.withValues(alpha: 0.5)),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
@@ -490,7 +490,7 @@ class _ProductFormPageState extends ConsumerState<ProductFormPage> {
     return Column(
       children: [
         DropdownButtonFormField<String>(
-          value: _status,
+          initialValue: _status,
           decoration: const InputDecoration(labelText: 'Status Produk'),
           items: const [
             DropdownMenuItem(value: 'active', child: Text('Aktif')),

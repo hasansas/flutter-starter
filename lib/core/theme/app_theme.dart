@@ -15,11 +15,7 @@ class AppTheme {
   static const int _primaryColor = 0xFF42B883; // Tokopedia green
   static const int _secondaryColor = 0xFF03AC0E; // Darker green
   static const int _accentColor = 0xFFFF6B35; // Orange accent
-  static const int _disabledColor = 0xFFBDBDBD;
-  static const int _surfaceColor = 0xFFF8F9FA;
   static const int _errorColor = 0xFFE53E3E;
-  static const int _warningColor = 0xFFED8936;
-  static const int _successColor = 0xFF38A169;
 
   static const MaterialColor primarySwatch =
       MaterialColor(_primaryColor, <int, Color>{
@@ -70,16 +66,14 @@ class AppTheme {
         primary: const Color(_primaryColor),
         secondary: const Color(_secondaryColor),
         tertiary: const Color(_accentColor),
-        surface: const Color(_surfaceColor),
-        background: Colors.white,
+        surface: Colors.white,
         error: const Color(_errorColor),
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: const Color(0xFF1A202C),
-        onBackground: const Color(0xFF1A202C),
         onError: Colors.white,
         outline: const Color(0xFFE2E8F0),
-        surfaceVariant: const Color(0xFFF7FAFC),
+        surfaceContainerHighest: const Color(0xFFF7FAFC),
       );
 
   static ColorScheme get darkColorScheme => ColorScheme.fromSeed(
@@ -88,16 +82,14 @@ class AppTheme {
         primary: const Color(_primaryColor),
         secondary: const Color(_secondaryColor),
         tertiary: const Color(_accentColor),
-        surface: const Color(0xFF2D3748),
-        background: const Color(0xFF1A202C),
+        surface: const Color(0xFF1A202C),
         error: const Color(_errorColor),
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: const Color(0xFFF7FAFC),
-        onBackground: const Color(0xFFF7FAFC),
         onError: Colors.white,
         outline: const Color(0xFF4A5568),
-        surfaceVariant: const Color(0xFF2D3748),
+        surfaceContainerHighest: const Color(0xFF2D3748),
       );
 
   // --------------------
@@ -199,7 +191,7 @@ class AppTheme {
   static ThemeData get light => ThemeData(
     useMaterial3: true,
     colorScheme: lightColorScheme,
-    scaffoldBackgroundColor: lightColorScheme.background,
+    scaffoldBackgroundColor: lightColorScheme.surface,
     fontFamily: fontFamily,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -238,7 +230,7 @@ class AppTheme {
     cardTheme: CardThemeData(
        color: Colors.white,
        elevation: 4,
-       shadowColor: Colors.black.withOpacity(0.1),
+       shadowColor: Colors.black.withValues(alpha: 0.1),
        shape: RoundedRectangleBorder(
          borderRadius: BorderRadius.circular(radiusL),
        ),
@@ -249,7 +241,7 @@ class AppTheme {
         backgroundColor: lightColorScheme.primary,
         foregroundColor: lightColorScheme.onPrimary,
         elevation: 3,
-        shadowColor: lightColorScheme.primary.withOpacity(0.3),
+        shadowColor: lightColorScheme.primary.withValues(alpha: 0.3),
         padding: const EdgeInsets.symmetric(horizontal: spacingL, vertical: spacingM),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusM),
@@ -273,20 +265,20 @@ class AppTheme {
       ),
     ),
     textTheme: TextTheme(
-      displayLarge: displayLarge.copyWith(color: lightColorScheme.onBackground),
-      displayMedium: displayMedium.copyWith(color: lightColorScheme.onBackground),
-      displaySmall: displaySmall.copyWith(color: lightColorScheme.onBackground),
-      headlineLarge: headlineLarge.copyWith(color: lightColorScheme.onBackground),
-      headlineMedium: headlineMedium.copyWith(color: lightColorScheme.onBackground),
-      headlineSmall: headlineSmall.copyWith(color: lightColorScheme.onBackground),
-      titleLarge: titleLarge.copyWith(color: lightColorScheme.onBackground, fontWeight: FontWeight.w700),
-      titleMedium: titleMedium.copyWith(color: lightColorScheme.onBackground, fontWeight: FontWeight.w600),
-      titleSmall: titleSmall.copyWith(color: lightColorScheme.onBackground, fontWeight: FontWeight.w600),
-      bodyLarge: bodyLarge.copyWith(color: lightColorScheme.onBackground),
-      bodyMedium: bodyMedium.copyWith(color: lightColorScheme.onBackground),
+      displayLarge: displayLarge.copyWith(color: lightColorScheme.onSurface),
+      displayMedium: displayMedium.copyWith(color: lightColorScheme.onSurface),
+      displaySmall: displaySmall.copyWith(color: lightColorScheme.onSurface),
+      headlineLarge: headlineLarge.copyWith(color: lightColorScheme.onSurface),
+      headlineMedium: headlineMedium.copyWith(color: lightColorScheme.onSurface),
+      headlineSmall: headlineSmall.copyWith(color: lightColorScheme.onSurface),
+      titleLarge: titleLarge.copyWith(color: lightColorScheme.onSurface, fontWeight: FontWeight.w700),
+      titleMedium: titleMedium.copyWith(color: lightColorScheme.onSurface, fontWeight: FontWeight.w600),
+      titleSmall: titleSmall.copyWith(color: lightColorScheme.onSurface, fontWeight: FontWeight.w600),
+      bodyLarge: bodyLarge.copyWith(color: lightColorScheme.onSurface),
+      bodyMedium: bodyMedium.copyWith(color: lightColorScheme.onSurface),
       bodySmall: bodySmall.copyWith(color: const Color(0xFF6B7280)),
-      labelLarge: labelLarge.copyWith(color: lightColorScheme.onBackground, fontWeight: FontWeight.w600),
-      labelMedium: labelMedium.copyWith(color: lightColorScheme.onBackground, fontWeight: FontWeight.w500),
+      labelLarge: labelLarge.copyWith(color: lightColorScheme.onSurface, fontWeight: FontWeight.w600),
+      labelMedium: labelMedium.copyWith(color: lightColorScheme.onSurface, fontWeight: FontWeight.w500),
       labelSmall: labelSmall.copyWith(color: const Color(0xFF9CA3AF)),
     ),
     dialogTheme: DialogThemeData(
@@ -323,7 +315,7 @@ class AppTheme {
   static ThemeData get dark => ThemeData(
     useMaterial3: true,
     colorScheme: darkColorScheme,
-    scaffoldBackgroundColor: darkColorScheme.background,
+    scaffoldBackgroundColor: darkColorScheme.surface,
     fontFamily: fontFamily,
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
@@ -362,7 +354,7 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: darkColorScheme.surface,
       elevation: 4,
-      shadowColor: Colors.black.withOpacity(0.3),
+      shadowColor: Colors.black.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radiusL),
       ),
@@ -373,7 +365,7 @@ class AppTheme {
         backgroundColor: darkColorScheme.primary,
         foregroundColor: darkColorScheme.onPrimary,
         elevation: 3,
-        shadowColor: darkColorScheme.primary.withOpacity(0.3),
+        shadowColor: darkColorScheme.primary.withValues(alpha: 0.3),
         padding: const EdgeInsets.symmetric(horizontal: spacingL, vertical: spacingM),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusM),
@@ -397,20 +389,20 @@ class AppTheme {
       ),
     ),
     textTheme: TextTheme(
-      displayLarge: displayLarge.copyWith(color: darkColorScheme.onBackground),
-      displayMedium: displayMedium.copyWith(color: darkColorScheme.onBackground),
-      displaySmall: displaySmall.copyWith(color: darkColorScheme.onBackground),
-      headlineLarge: headlineLarge.copyWith(color: darkColorScheme.onBackground),
-      headlineMedium: headlineMedium.copyWith(color: darkColorScheme.onBackground),
-      headlineSmall: headlineSmall.copyWith(color: darkColorScheme.onBackground),
-      titleLarge: titleLarge.copyWith(color: darkColorScheme.onBackground, fontWeight: FontWeight.w700),
-      titleMedium: titleMedium.copyWith(color: darkColorScheme.onBackground, fontWeight: FontWeight.w600),
-      titleSmall: titleSmall.copyWith(color: darkColorScheme.onBackground, fontWeight: FontWeight.w600),
-      bodyLarge: bodyLarge.copyWith(color: darkColorScheme.onBackground),
-      bodyMedium: bodyMedium.copyWith(color: darkColorScheme.onBackground),
+      displayLarge: displayLarge.copyWith(color: darkColorScheme.onSurface),
+      displayMedium: displayMedium.copyWith(color: darkColorScheme.onSurface),
+      displaySmall: displaySmall.copyWith(color: darkColorScheme.onSurface),
+      headlineLarge: headlineLarge.copyWith(color: darkColorScheme.onSurface),
+      headlineMedium: headlineMedium.copyWith(color: darkColorScheme.onSurface),
+      headlineSmall: headlineSmall.copyWith(color: darkColorScheme.onSurface),
+      titleLarge: titleLarge.copyWith(color: darkColorScheme.onSurface, fontWeight: FontWeight.w700),
+      titleMedium: titleMedium.copyWith(color: darkColorScheme.onSurface, fontWeight: FontWeight.w600),
+      titleSmall: titleSmall.copyWith(color: darkColorScheme.onSurface, fontWeight: FontWeight.w600),
+      bodyLarge: bodyLarge.copyWith(color: darkColorScheme.onSurface),
+      bodyMedium: bodyMedium.copyWith(color: darkColorScheme.onSurface),
       bodySmall: bodySmall.copyWith(color: const Color(0xFF9CA3AF)),
-      labelLarge: labelLarge.copyWith(color: darkColorScheme.onBackground, fontWeight: FontWeight.w600),
-      labelMedium: labelMedium.copyWith(color: darkColorScheme.onBackground, fontWeight: FontWeight.w500),
+      labelLarge: labelLarge.copyWith(color: darkColorScheme.onSurface, fontWeight: FontWeight.w600),
+      labelMedium: labelMedium.copyWith(color: darkColorScheme.onSurface, fontWeight: FontWeight.w500),
       labelSmall: labelSmall.copyWith(color: const Color(0xFF6B7280)),
     ),
     dialogTheme: DialogThemeData(

@@ -70,7 +70,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                         borderRadius: BorderRadius.circular(AppTheme.radiusL),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 4),
                           ),
@@ -94,7 +94,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     Text(
                       "Bergabunglah dengan Pasar Al Huda",
                       style: textTheme.bodyLarge?.copyWith(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                       ),
                     ),
                   ],
@@ -110,7 +110,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                     borderRadius: BorderRadius.circular(AppTheme.radiusL),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                         blurRadius: 20,
                         offset: const Offset(0, 8),
                       ),
@@ -232,7 +232,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                             Text(
                               "Sudah punya akun? ",
                               style: textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurface.withOpacity(0.7),
+                                color: colorScheme.onSurface.withValues(alpha: 0.7),
                               ),
                             ),
                             GestureDetector(
