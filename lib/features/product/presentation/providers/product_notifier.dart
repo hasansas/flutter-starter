@@ -36,6 +36,9 @@ class ProductNotifier extends StateNotifier<ProductState> {
       hasMore: true,
     );
     try {
+      // Add 1 second delay to simulate loading and see the loading indicator
+      await Future.delayed(const Duration(seconds: 1));
+      
       final allItems = await getProductsBySeller(sellerId);
       final paginatedItems = _getPaginatedItems(allItems, 1);
       final hasMore = allItems.length > state.itemsPerPage;
@@ -55,6 +58,9 @@ class ProductNotifier extends StateNotifier<ProductState> {
     
     state = state.copyWith(isLoadingMore: true, error: null);
     try {
+      // Add 1 second delay to simulate loading and see the loading indicator
+      await Future.delayed(const Duration(seconds: 1));
+      
       final allItems = await getProductsBySeller(sellerId);
       final nextPage = state.currentPage + 1;
       final newItems = _getPaginatedItems(allItems, nextPage);
@@ -85,6 +91,10 @@ class ProductNotifier extends StateNotifier<ProductState> {
       currentPage: 1,
       hasMore: true,
     );
+    
+    // Add 1 second delay to simulate loading and see the refresh indicator
+    await Future.delayed(const Duration(seconds: 1));
+    
     await loadProducts(sellerId);
   }
 
