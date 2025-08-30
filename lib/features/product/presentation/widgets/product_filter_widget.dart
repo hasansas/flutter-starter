@@ -594,7 +594,7 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
       children: [
         Expanded(
           child: AppButton(
-            label: 'Simpan Produk',
+            label: 'Terapkan Filter',
             onPressed: _applyFilters,
             color: colorScheme.primary,
           ),
@@ -602,10 +602,8 @@ class _ProductFilterWidgetState extends ConsumerState<ProductFilterWidget> {
         const SizedBox(width: 12),
         Expanded(
           child: AppButton(
-            label: 'Simpan sebagai Draft',
-            onPressed: () {
-              // Handle save as draft
-            },
+            label: 'Reset Filter',
+            onPressed: _clearFilters,
             isOutlined: true,
             textColor: colorScheme.onSurface,
           ),

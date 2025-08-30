@@ -161,9 +161,19 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
                        minPrice: minPrice,
                        maxPrice: maxPrice,
                      );
+                     
+                     // Close filter after applying
+                     setState(() {
+                       _showFilters = false;
+                     });
                    },
                    onClearFilters: () {
                      ref.read(productNotifierProvider.notifier).clearSearchAndLoadProducts(_sellerId);
+                     
+                     // Close filter after clearing
+                     setState(() {
+                       _showFilters = false;
+                     });
                    },
                  ),
                ),
