@@ -31,7 +31,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final auth = ref.watch(authProvider);
+    final authState = ref.watch(authProvider);
     final authNotifier = ref.read(authProvider.notifier);
 
     return Scaffold(
@@ -54,19 +54,28 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             const SizedBox(height: 20),
             AppButton(
               label: "Login",
-              loading: auth.loading,
+              loading: authState.loading,
               expanded: true,
-              onPressed: () {
-                // capture current context
-                final navigator = Navigator.of(context);
+              onPressed: authState.loading
+                  ? null
+                  : () async {
+                      FocusScope.of(context).unfocus();
+                      final navigator = Navigator.of(context);
 
-                authNotifier.login(emailCtrl.text, passCtrl.text).then((_) {
-                  final user = ref.read(authProvider).user;
-                  if (user != null) {
-                    navigator.pushNamedAndRemoveUntil("/", (route) => false);
-                  }
-                });
-              },
+                      await authNotifier.login(
+                        emailCtrl.text.trim(),
+                        passCtrl.text.trim(),
+                      );
+
+                      final user = ref.read(authProvider).user;
+                      if (user != null && mounted) {
+                        navigator.pushNamedAndRemoveUntil("/", (_) => false);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Login failed")),
+                        );
+                      }
+                    },
             ),
           ],
         ),
