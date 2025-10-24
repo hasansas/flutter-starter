@@ -63,4 +63,21 @@ class AuthRemoteDataSource {
   Future<void> logout() async {
     await apiClient.clearTokens();
   }
+
+  Future<UserModel> getAuthUser() async {
+    try {
+      // Fetch user profile
+      final user = await getProfile();
+      return user;
+    } on AppException {
+      rethrow;
+    } catch (e) {
+      // If token invalid or network fails, clear tokens
+      await apiClient.clearTokens();
+      throw NetworkException(
+        'Failed to restore user profile',
+        details: e.toString(),
+      );
+    }
+  }
 }
