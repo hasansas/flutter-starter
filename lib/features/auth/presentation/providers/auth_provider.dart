@@ -3,6 +3,7 @@ import '../../../../core/utils/logger.dart';
 import '../../../auth/domain/entities/user.dart';
 import '../../../auth/domain/usecases/login_user.dart';
 import '../../../auth/domain/usecases/logout_user.dart';
+import '../../../auth/domain/usecases/get_auth_user.dart';
 
 class AuthState {
   final User? user;
@@ -23,9 +24,13 @@ class AuthState {
 class AuthNotifier extends StateNotifier<AuthState> {
   final LoginUser loginUser;
   final LogoutUser logoutUser;
+  final GetAuthUser getAuthUser;
 
-  AuthNotifier({required this.loginUser, required this.logoutUser})
-    : super(const AuthState());
+  AuthNotifier({
+    required this.loginUser,
+    required this.logoutUser,
+    required this.getAuthUser,
+  }) : super(const AuthState());
 
   Future<void> login(String email, String password) async {
     state = state.copyWith(loading: true);
@@ -41,6 +46,18 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> logout() async {
     await logoutUser();
     state = const AuthState();
+  }
+
+  /// Called on startup
+  Future<void> restoreSession() async {
+    try {
+      final (token, user) = await getAuthUser();
+      if (token != null && user != null) {
+        state = AuthState(user: user, token: token);
+      }
+    } catch (e) {
+      Logger.error("Failed to restore session", error: e);
+    }
   }
 }
 

@@ -17,6 +17,13 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> logout() => remote.logout();
+
+  @override
+  Future<(String?, User?)> getAuthUser() async {
+    final userModel = await remote.getAuthUser();
+    final token = remote.apiClient.accessToken ?? '';
+    return (token, userModel.toEntity());
+  }
 }
 
 extension on UserModel {

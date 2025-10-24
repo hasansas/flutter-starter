@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sas_app/features/auth/domain/usecases/get_auth_user.dart';
 import 'core/theme/app_theme.dart';
 import 'core/network/api_client_provider.dart';
 import 'features/auth/data/datasources/auth_remote_datasource.dart';
@@ -14,7 +15,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // ✅ Read the global ApiClient instance (already preloaded in main.dart)
+    // Read the global ApiClient instance (already preloaded in main.dart)
     final apiClientAsync = ref.watch(apiClientProvider);
 
     return apiClientAsync.when(
@@ -27,10 +28,15 @@ class MyApp extends ConsumerWidget {
         return ProviderScope(
           overrides: [
             authProvider.overrideWith((ref) {
-              return AuthNotifier(
+              final notifier = AuthNotifier(
                 loginUser: LoginUser(repo),
                 logoutUser: LogoutUser(repo),
+                getAuthUser: GetAuthUser(repo),
               );
+
+              // Restore Session
+              Future.microtask(() => notifier.restoreSession());
+              return notifier;
             }),
           ],
           child: MaterialApp(
